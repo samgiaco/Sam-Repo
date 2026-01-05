@@ -11,7 +11,7 @@ def test_script_output():
     output_filename = "output.json"
 
     result = subprocess.run(
-        [sys.executable, "-m", "main"],
+        [sys.executable, "main.py"],
         cwd=str(repo_root),
         capture_output=True,
         text=True
