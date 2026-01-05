@@ -12,28 +12,34 @@ output_filename = "output.json"
 if os.path.exists(output_filename):
     os.remove(output_filename)
 
-average_final = 0.0
-unique_students = 0
 
-with open(input_filename) as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        print(row)
+def finalavg(input_filename):
+    average_final = 0.0
+    count=0
+    with open(input_filename) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row['exam_name'] == 'final':
+                average_final = average_final + float(row['score'])
+                count=count+1
 
-        # TODO: compute average final score
-        # TODO: unique student count
-        if row['exam_name']=='final':
-            average_final=average_final+float(row['score'])
-            unique_students=unique_students+1
+    return average_final/count
 
-average_final=round(average_final/unique_students, 1)
+def uniquestudents(input_filename):
+    list1=[]
+    with open(input_filename) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            list1.append(row['student_id'])
+    return len(set(list1))
+
 
 if os.path.exists(output_filename):
     os.remove(output_filename)
 
 result = {
-    "average_final": average_final,
-    "unique_students": unique_students,
+    "average_final": finalavg(input_filename),
+    "unique_students": uniquestudents(input_filename),
 }
 
 with open(output_filename, "w") as out:
