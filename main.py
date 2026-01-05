@@ -17,9 +17,12 @@ with open(input_filename) as f:
         print(row)
 
         # TODO: compute average final score
-
         # TODO: unique student count
+        if row['exam_name']=='final':
+            average_final=average_final+float(row['score'])
+            unique_students=unique_students+1
 
+average_final=round(average_final/unique_students, 1)
 if os.path.exists(output_filename):
     os.remove(output_filename)
 
