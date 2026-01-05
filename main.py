@@ -2,7 +2,11 @@ import csv
 import os
 import json
 
-input_filename = "test_scores.csv"
+from pathlib import Path
+
+full_base_path = Path(__file__).resolve().parent
+
+input_filename = full_base_path / "test_scores.csv"
 output_filename = "output.json"
 
 if os.path.exists(output_filename):
@@ -23,8 +27,18 @@ with open(input_filename) as f:
             unique_students=unique_students+1
 
 average_final=round(average_final/unique_students, 1)
+
 if os.path.exists(output_filename):
     os.remove(output_filename)
+
+result = {
+    "average_final": average_final,
+    "unique_students": unique_students,
+}
+
+with open(output_filename, "w") as out:
+    json.dump(result, out, indent=2)
+
 
 result = {
     "average_final": average_final,
