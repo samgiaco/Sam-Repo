@@ -39,12 +39,3 @@ result = {
 with open(output_filename, "w") as out:
     json.dump(result, out, indent=2)
 
-
-result = {
-    "average_final": average_final,
-    "unique_students": unique_students,
-}
-
-with open(output_filename, "w") as out:
-    json.dump(result, out, indent=2)
-
